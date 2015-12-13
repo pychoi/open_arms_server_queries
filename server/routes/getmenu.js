@@ -17,8 +17,8 @@ router.get('/', function(req,res){
         JOIN meal_allergen_allergenspecific ON meal_allergen_allergenspecific.meal_id = meals.meal_id\
         JOIN allergens ON meal_allergen_allergenspecific.allergen_id = allergens.allergen_id\
         JOIN allergenspecific ON meal_allergen_allergenspecific.allergenspecific_id = allergenspecific.specific_id\
-        WHERE menus.start_date = $1 AND menus.end_date = $2\
-        ORDER BY categories.category_id ASC",
+        WHERE menus.start_date >= $1 AND menus.start_date <= $2\
+        ORDER BY menus.start_date ASC, categories.category_id ASC",
             [req.query.start_date, req.query.end_date]);
 
 
