@@ -19,7 +19,7 @@ router.get('/', function(req,res){
         JOIN allergenspecific ON meal_allergen_allergenspecific.allergenspecific_id = allergenspecific.specific_id\
         WHERE menus.start_date >= $1 AND menus.start_date <= $2\
         ORDER BY menus.start_date ASC, categories.category_id ASC",
-            [req.query.start_date, req.query.end_date]);
+            [req.query.startDate, req.query.endDate]);
 
 
         // Stream results back one row at a time, push into results array

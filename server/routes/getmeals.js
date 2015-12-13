@@ -37,6 +37,7 @@ router.get('/showAll', function(req,res){
 });
 
 router.get('/searchMeal', function(req,res){
+
     var results = [];
 
     pg.connect(connectionString, function (err, client) {
@@ -48,8 +49,8 @@ router.get('/searchMeal', function(req,res){
        JOIN allergens ON meal_allergen_allergenspecific.allergen_id = allergens.allergen_id\
        JOIN allergenspecific ON meal_allergen_allergenspecific.allergenspecific_id = allergenspecific.specific_id\
        WHERE meals.status = true\
-       AND (meals.entree ILIKE %$1% OR meals.side_1 ILIKE %$1% OR meals.side_2 ILIKE %$1%)",
-            [req.query]);
+       AND (meals.entree ILIKE $1 OR meals.side_1 ILIKE $1 OR meals.side_2 ILIKE $1)",
+            [req.query.searchTerm]);
 
 
         // Stream results back one row at a time, push into results array
