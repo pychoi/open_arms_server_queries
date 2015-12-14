@@ -50,7 +50,7 @@ router.get('/searchMeal', function(req,res){
        JOIN allergenspecific ON meal_allergen_allergenspecific.allergenspecific_id = allergenspecific.specific_id\
        WHERE meals.status = true\
        AND (meals.entree ILIKE $1 OR meals.side_1 ILIKE $1 OR meals.side_2 ILIKE $1)",
-            [req.query.searchTerm]);
+            ['%' + req.query.searchTerm + '%']);
 
 
         // Stream results back one row at a time, push into results array
